@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.zzzyxwvut</groupId>
+    <artifactId>numerics</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <description>A numeric converter.</description>
+
+    <properties>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+	<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+	<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+    </properties>
+
+    <build>
+	<plugins>
+	    <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-compiler-plugin</artifactId>
+		<version>${maven-compiler-plugin.version}</version>
+		<configuration>
+		    <encoding>UTF-8</encoding>
+		    <release>11</release>
+		    <showDeprecation>true</showDeprecation>
+		    <showWarnings>true</showWarnings>
+		    <verbose>false</verbose>
+		    <compilerArgs>
+			<arg>-g</arg>
+			<!-- JLS-11, $5.1.1. -->
+			<arg>-Xlint:all,-cast</arg>
+			<arg>-Xdiags:verbose</arg>
+		    </compilerArgs>
+		</configuration>
+	    </plugin>
+
+	    <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-surefire-plugin</artifactId>
+		<version>${maven-surefire-plugin.version}</version>
+		<configuration>
+		    <skip>true</skip>
+		</configuration>
+	    </plugin>
+	</plugins>
+    </build>
+</project>
