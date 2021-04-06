@@ -4,6 +4,8 @@ import java.util.Objects;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
+import org.zzzyxwvut.numerics.converter.internal.DefaultArabicRomanConverter;
+
 /** This interface declares conversion between Arabic and Roman numerals. */
 public interface ArabicRomanConverter
 {
@@ -32,7 +34,7 @@ public interface ArabicRomanConverter
 	 */
 	static ArabicRomanConverter instance()
 	{
-		throw new UnsupportedOperationException();
+		return new DefaultArabicRomanConverter();
 	}
 
 	/** This {@code Supplier} represents a Roman numeral. */
