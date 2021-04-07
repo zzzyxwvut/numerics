@@ -14,7 +14,22 @@
 
 	<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 	<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+
+	<ate.version>0.0.0</ate.version>
     </properties>
+
+    <dependencies>
+	<!--
+	    ate should be cloned and locally installed from:
+	    https://bitbucket.org/zzzyxwvut/ate.git
+	-->
+	<dependency>
+	    <groupId>org.zzzyxwvut</groupId>
+	    <artifactId>ate</artifactId>
+	    <version>${ate.version}</version>
+	    <optional>true</optional>
+	</dependency>
+    </dependencies>
 
     <build>
 	<plugins>
