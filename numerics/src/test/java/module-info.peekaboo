@@ -1,0 +1,12 @@
+module org.zzzyxwvut.numerics.converter
+{
+	requires static org.zzzyxwvut.ate;
+
+	opens org.zzzyxwvut.numerics.converter to
+		org.zzzyxwvut.ate;
+	opens org.zzzyxwvut.numerics.converter.internal to
+		org.zzzyxwvut.ate;
+
+	provides org.zzzyxwvut.ate.support.AccessibleUplooker with
+		org.zzzyxwvut.numerics.converter.internal.TestUplooker;
+}
