@@ -25,7 +25,8 @@ class NumericConverterTester
 	public static void main(String... args)
 	{
 		Tester.newBuilder(Set.of(ArabicRomanConverterTests.class,
-						ArabicNumeralTests.class))
+						ArabicNumeralTests.class,
+						RomanNumeralTests.class))
 			.configurable(Configurable.newBuilder()
 				.executionPolicy(Testable.ExecutionPolicy
 								.CONCURRENT)
