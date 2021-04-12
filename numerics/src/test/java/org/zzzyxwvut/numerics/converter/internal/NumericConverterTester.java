@@ -16,13 +16,16 @@ class NumericConverterTester
 		loader.setClassAssertionStatus(
 			"org.zzzyxwvut.numerics.converter.ArabicRomanConverterTests",
 									true);
+		loader.setPackageAssertionStatus(
+			"org.zzzyxwvut.numerics.converter.internal", true);
 	}
 
 	private NumericConverterTester() { /* No instantiation. */ }
 
 	public static void main(String... args)
 	{
-		Tester.newBuilder(Set.of(ArabicRomanConverterTests.class))
+		Tester.newBuilder(Set.of(ArabicRomanConverterTests.class,
+						ArabicNumeralTests.class))
 			.configurable(Configurable.newBuilder()
 				.executionPolicy(Testable.ExecutionPolicy
 								.CONCURRENT)
