@@ -9,8 +9,8 @@ import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
+import java.util.function.IntFunction;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.zzzyxwvut.ate.Status;
 import org.zzzyxwvut.ate.Testable;
@@ -65,23 +65,19 @@ class RomanNumeralTests implements Testable
 			.build();
 	}
 
-	private static Function<List<String>,
-				Function<Integer, Stream<String>>>
-							letterer()
+	private static Function<List<String>, IntFunction<String>> letterer()
 	{
-		return romans -> index -> Stream.of(romans.get(index));
+		return romans -> romans::get;
 	}
 
-	private static Function<Function<Integer, Stream<String>>,
-				Function<Integer,
-				Function<Integer, String>>> generator()
+	private static Function<IntFunction<String>,
+				IntFunction<IntFunction<String>>> generator()
 	{
 		return letterer -> digitCount -> wordCount ->
 							ThreadLocalRandom
 			.current()
 			.ints(wordCount, 0, digitCount)
-			.boxed()
-			.flatMap(letterer)
+			.mapToObj(letterer)
 			.collect(Collectors.joining(""));
 	}
 
@@ -96,11 +92,11 @@ class RomanNumeralTests implements Testable
 							ThreadLocalRandom
 				.current()
 				.ints(32, 1, maxRomanLength + 1)
-				.boxed()
-				.map(Function.<Function<String, List<String>>>
+				.mapToObj(Function.<Function<IntFunction<String>,
+						IntFunction<List<String>>>>
 								identity()
-					.apply(List::of)
-					.compose(generator()
+					.apply(f -> i -> List.of(f.apply(i)))
+					.apply(generator()
 						.apply(letterer()
 							.apply(romans))
 						.apply(romans.size())))
