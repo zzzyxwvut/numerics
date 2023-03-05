@@ -90,8 +90,8 @@ public interface ArabicRomanConverter
 		public boolean equals(Object that)
 		{
 			return ((this == that)
-				|| ((that instanceof Roman)
-				&& value.equals(((Roman) that).get())));
+				|| ((that instanceof Roman r)
+				&& value.equals(r.get())));
 		}
 
 		@Override
@@ -135,8 +135,8 @@ public interface ArabicRomanConverter
 		public boolean equals(Object that)
 		{
 			return ((this == that)
-				|| ((that instanceof Arabic)
-				&& value.equals(((Arabic<?>) that).get())));
+				|| ((that instanceof Arabic<?> a)
+				&& value.equals(a.get())));
 		}
 
 		@Override
