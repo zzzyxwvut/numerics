@@ -152,7 +152,7 @@
 		<configuration>
 		    <classpathScope>test</classpathScope>
 		    <executable>/usr/bin/java</executable>
-		    <fork>true</fork>
+
 		    <!--
 			With a single src/main/java/module-info.java, use:
 
