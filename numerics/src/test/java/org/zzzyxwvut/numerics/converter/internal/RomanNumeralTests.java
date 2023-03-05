@@ -97,8 +97,9 @@ class RomanNumeralTests implements Testable
 				.current()
 				.ints(32, 1, maxRomanLength + 1)
 				.boxed()
-				.map(Function.<List<String>>identity()
-					.<String>compose(List::of)
+				.map(Function.<Function<String, List<String>>>
+								identity()
+					.apply(List::of)
 					.compose(generator()
 						.apply(letterer()
 							.apply(romans))
