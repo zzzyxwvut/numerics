@@ -50,7 +50,7 @@ public final class DefaultArabicRomanConverter implements ArabicRomanConverter
 
 		do {
 			final String roman = romans.next();
-			final Short arabic = arabics.next();
+			final short arabic = arabics.next();
 
 			while (value.startsWith(roman, offset)) {
 				result += arabic;
