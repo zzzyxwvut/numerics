@@ -35,7 +35,7 @@ class RomanNumeralTests implements Testable
 		try {
 			arabicNumeral = converter.convert(new Roman(
 							pendingValue));
-		} catch (final IndexOutOfBoundsException ignored) {
+		} catch (final IndexOutOfBoundsException aleatory) {
 			NON_NUMERALS.incrementAndGet();
 			return;
 		}
@@ -95,7 +95,8 @@ class RomanNumeralTests implements Testable
 				.mapToObj(Function.<Function<IntFunction<String>,
 						IntFunction<List<String>>>>
 								identity()
-					.apply(f -> i -> List.of(f.apply(i)))
+					.apply(generator -> i -> List.of(
+							generator.apply(i)))
 					.apply(generator()
 						.apply(letterer()
 							.apply(romans))
