@@ -10,6 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.function.IntFunction;
+import java.util.function.LongFunction;
 import java.util.stream.Collectors;
 
 import org.zzzyxwvut.ate.Status;
@@ -71,7 +72,7 @@ class RomanNumeralTests implements Testable
 	}
 
 	private static Function<IntFunction<String>,
-				IntFunction<IntFunction<String>>> generator()
+				IntFunction<LongFunction<String>>> generator()
 	{
 		return letterer -> digitCount -> wordCount ->
 							ThreadLocalRandom
@@ -91,8 +92,8 @@ class RomanNumeralTests implements Testable
 		return Map.of("testRandomRomanNumeralConversion",
 							ThreadLocalRandom
 				.current()
-				.ints(32, 1, maxRomanLength + 1)
-				.mapToObj(Function.<Function<IntFunction<String>,
+				.ints(32L, 1, maxRomanLength + 1)
+				.mapToObj(Function.<Function<LongFunction<String>,
 						IntFunction<List<String>>>>
 								identity()
 					.apply(generator -> i -> List.of(
