@@ -23,21 +23,20 @@ import org.zzzyxwvut.numerics.converter.ArabicRomanConverter;
 
 class RomanNumeralTests implements Testable
 {
-	private static final AtomicInteger NON_NUMERALS = new AtomicInteger(0);
-
 	private final ArabicRomanConverter converter =
 					new DefaultArabicRomanConverter();
 
 	public void testRandomRomanNumeralConversion(Status status,
-							String pendingValue)
+						AtomicInteger nonNumerals,
+						String pendingValue)
 	{
 		final Arabic<Short> arabicNumeral;
 
 		try {
 			arabicNumeral = converter.convert(new Roman(
-							pendingValue));
+								pendingValue));
 		} catch (final IndexOutOfBoundsException aleatory) {
-			NON_NUMERALS.incrementAndGet();
+			nonNumerals.incrementAndGet();
 			return;
 		}
 
@@ -45,17 +44,17 @@ class RomanNumeralTests implements Testable
 			.format("accepted: %s%n", pendingValue);
 		final String romanValue = converter.convert(arabicNumeral)
 			.get();
-		assert pendingValue.equals(romanValue) :
-					String.format("%s => %s%n",
-						pendingValue, romanValue);
+		assert pendingValue.equals(romanValue) : String.format(
+								"%s => %s%n",
+								pendingValue,
+								romanValue);
 	}
 
-	public static void tearDownAll(Status status)
+	public static void tearDownAll(Status status,
+						AtomicInteger nonNumerals)
 	{
-		final int nonNumerals = NON_NUMERALS.get();
-		NON_NUMERALS.set(0);
 		status.printStream()
-			.format("%nREJECTS TOTAL: %s%n", nonNumerals);
+			.format("%nREJECTS TOTAL: %s%n", nonNumerals.get());
 	}
 
 	public static Instantiable<RomanNumeralTests> instantiable()
@@ -84,24 +83,36 @@ class RomanNumeralTests implements Testable
 
 	private static Map<String, Collection<List<?>>> arguments()
 	{
+		final int maxRomanLength = 15; /* MMMDCCCLXXXVIII */
+		final AtomicInteger nonNumerals = new AtomicInteger(0);
 		final List<String> romans = Arrays.asList("M", "D", "C",
 								"L", "X",
 								"V", "I");
-		final int maxRomanLength = 15; /* MMMDCCCLXXXVIII */
 		Collections.shuffle(romans);
 		return Map.of("testRandomRomanNumeralConversion",
+
+				/*
+				 * Generate 32 or less distinct words of 1-to-15
+				 * Roman digits.
+				 */
 							ThreadLocalRandom
 				.current()
 				.ints(32L, 1, maxRomanLength + 1)
 				.mapToObj(Function.<Function<LongFunction<String>,
-						IntFunction<List<String>>>>
+						Function<AtomicInteger,
+						IntFunction<List<?>>>>>
 								identity()
-					.apply(generator -> i -> List.of(
+					.apply(generator -> counter -> i ->
+								List.of(
+							counter,
 							generator.apply(i)))
 					.apply(generator()
 						.apply(letterer()
 							.apply(romans))
-						.apply(romans.size())))
-				.collect(Collectors.toUnmodifiableSet()));
-	}	/* Generate 32 words of 1-to-15 Roman digits. */
+						.apply(romans.size()))
+					.apply(nonNumerals))
+				.collect(Collectors.toUnmodifiableSet()),
+
+			"tearDownAll", List.of(List.of(nonNumerals)));
+	}
 }
