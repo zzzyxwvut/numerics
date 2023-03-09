@@ -2,7 +2,10 @@ package org.zzzyxwvut.numerics.converter;
 
 import java.math.BigDecimal;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -41,9 +44,24 @@ public class ArabicRomanConverterTests implements Testable
 		final List<String> obtained = Stream.of("IV", "XXXII",
 				"CCLVI", "XVI", "I", "DXII", "MMXLVIII",
 				"CXXVIII", "MXXIV", "VIII", "LXIV", "II")
-			.map(Roman::new)
-			.sorted(Comparator.reverseOrder())
-			.map(Roman::get)
+			.sorted(Function.<Function<Function<String, Arabic<Short>>,
+					Function<Map<String, Arabic<Short>>,
+							Comparator<String>>>>
+								identity()
+				.apply(remapper -> cache -> (left, right) ->
+					/*
+					 * Arrange the elements in reverse order
+					 * to match the _expected_ elements.
+					 */
+									cache
+					.computeIfAbsent(right, remapper)
+						.compareTo(cache
+							.computeIfAbsent(
+								left,
+								remapper)))
+				.apply(value -> CONVERTER.convert(
+							new Roman(value)))
+				.apply(new HashMap<>(32)))
 			.collect(Collectors.toUnmodifiableList());
 		assertEquals(expected, obtained);
 	}
