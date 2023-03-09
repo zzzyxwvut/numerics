@@ -43,9 +43,9 @@ public interface ArabicRomanConverter
 		/* Note that an empty string shall be matched as well. */
 		private static final Pattern FROM_1_TO_3999 = Pattern.compile(
 								"M{0,3}?"
-					+ "(?:(?:CM|CD)??|D??C{0,3}?)"
-					+ "(?:(?:XC|XL)??|L??X{0,3}?)"
-					+ "(?:(?:IX|IV)??|V??I{0,3}?)");
+					+ "(?:(?:C[MD])??|D??C{0,3}?)"
+					+ "(?:(?:X[CL])??|L??X{0,3}?)"
+					+ "(?:(?:I[XV])??|V??I{0,3}?)");
 		private static final ArabicRomanConverter CONVERTER =
 					ArabicRomanConverter.instance();
 
