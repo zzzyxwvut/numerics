@@ -23,6 +23,7 @@
 
 	<!-- An empty value implies testing of all classes. -->
 	<ate.some></ate.some>
+	<exec.executable>java</exec.executable>
     </properties>
 
     <dependencies>
@@ -151,7 +152,7 @@
 		</executions>
 		<configuration>
 		    <classpathScope>test</classpathScope>
-		    <executable>/usr/bin/java</executable>
+		    <executable>${exec.executable}</executable>
 
 		    <!--
 			With a single src/main/java/module-info.java, use:

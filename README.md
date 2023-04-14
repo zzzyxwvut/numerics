@@ -1,8 +1,12 @@
 A numeric converter (of Arabic and Roman numerals).
 
-This project depends on `ate` available from
+This project depends on `Ate` available from
 [here](https://bitbucket.org/zzzyxwvut/ate.git "here").
-Before building this project, make a local installation of `ate`.
+Before building this project,  
+make a local installation of `Ate`.
 
-Also adapt the path to a JDK-17 (or newer) JVM for
-the `executable` parameter of `exec-maven-plugin`.
+Should the search for the `java` executable fail to turn up the right one, take  
+advantage of an
+[`exec.executable`](https://www.mojohaus.org/exec-maven-plugin/exec-mojo.html#executable)
+user property whose value can be an absolute  
+file name.
