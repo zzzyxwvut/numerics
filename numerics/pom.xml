@@ -12,13 +12,13 @@
     <properties>
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-	<maven-dependency-plugin.version>3.1.2</maven-dependency-plugin.version>
-	<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-	<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-	<maven-antrun-plugin.version>3.0.0</maven-antrun-plugin.version>
-	<exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
+	<maven-dependency-plugin.version>3.5.0</maven-dependency-plugin.version>
+	<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+	<maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
+	<maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
+	<exec-maven-plugin.version>3.1.0</exec-maven-plugin.version>
 
-	<ant.version>1.10.9</ant.version>
+	<ant.version>1.10.13</ant.version>
 	<ate.version>0.0.0</ate.version>
 
 	<!-- An empty value implies testing of all classes. -->
@@ -27,7 +27,7 @@
 
     <dependencies>
 	<!--
-	    ate should be cloned and locally installed from:
+	    Ate should be cloned and locally installed from:
 	    https://bitbucket.org/zzzyxwvut/ate.git
 	-->
 	<dependency>
