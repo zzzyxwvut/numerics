@@ -60,8 +60,8 @@
 		<configuration>
 		    <encoding>UTF-8</encoding>
 		    <release>17</release>
+		    <showCompilationChanges>true</showCompilationChanges>
 		    <showDeprecation>true</showDeprecation>
-		    <showWarnings>true</showWarnings>
 		    <verbose>false</verbose>
 		    <compilerArgs>
 			<arg>-g</arg>
