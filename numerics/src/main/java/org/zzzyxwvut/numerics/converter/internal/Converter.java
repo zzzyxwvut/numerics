@@ -10,6 +10,7 @@ import java.util.function.Supplier;
  * @param <B> the type of a supplier-furnished object to convert to
  * @param <U> the type of a supplier to convert to
  */
+@FunctionalInterface
 interface Converter<A, T extends Supplier<A>, B, U extends Supplier<B>>
 {
 	/**
