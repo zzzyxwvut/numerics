@@ -164,11 +164,8 @@
 
 			++module-path target/test-classes:/path/to/ate.jar
 		    -->
-		    <!--
-			See java.lang.invoke.MethodHandles#privateLookupIn(Class, MethodHandles.Lookup)
-		    -->
 		    <commandlineArgs>
-			-XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -XX:+AlwaysPreTouch -Xms40m -Xmx40m -Xlog:heap*=info,gc=info -Date.some=${ate.some} --add-reads org.zzzyxwvut.ate=org.zzzyxwvut.numerics.converter --add-modules org.zzzyxwvut.ate --module-path target${file.separator}test-classes${path.separator}${org.zzzyxwvut:ate:jar} --module org.zzzyxwvut.numerics.converter/org.zzzyxwvut.numerics.converter.internal.NumericConverterTester
+			-XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -XX:+AlwaysPreTouch -Xms40m -Xmx40m -Xlog:heap*=info,gc=info -Date.some=${ate.some} --add-modules org.zzzyxwvut.ate --module-path target${file.separator}test-classes${path.separator}${org.zzzyxwvut:ate:jar} --module org.zzzyxwvut.numerics.converter/org.zzzyxwvut.numerics.converter.internal.NumericConverterTester
 		    </commandlineArgs>
 		    <timeout>16000</timeout>
 		    <workingDirectory>${basedir}</workingDirectory>
