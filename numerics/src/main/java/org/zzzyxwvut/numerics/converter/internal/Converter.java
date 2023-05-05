@@ -14,10 +14,9 @@ import java.util.function.Supplier;
 interface Converter<A, T extends Supplier<A>, B, U extends Supplier<B>>
 {
 	/**
-	 * Returns a supplier converted from the passed supplier.
+	 * {@return a supplier converted from the passed supplier}
 	 *
 	 * @param supplier a supplier
-	 * @return a supplier converted from the passed supplier
 	 */
 	U convert(T supplier);
 }

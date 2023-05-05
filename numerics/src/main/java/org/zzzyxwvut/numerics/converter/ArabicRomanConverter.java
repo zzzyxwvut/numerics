@@ -10,28 +10,22 @@ import org.zzzyxwvut.numerics.converter.internal.DefaultArabicRomanConverter;
 public interface ArabicRomanConverter
 {
 	/**
-	 * Returns the Roman numeral equivalent of the passed Arabic numeral.
+	 * {@return the Roman numeral equivalent of the passed Arabic numeral}
 	 *
 	 * @param numeral an Arabic numeral
-	 * @return the Roman numeral equivalent of the passed Arabic numeral
 	 * @throws IndexOutOfBoundsException if the passed numeral is out of
 	 *	range [1-3999]
 	 */
 	Roman convert(Arabic<Short> numeral);
 
 	/**
-	 * Returns the Arabic numeral equivalent of the passed Roman numeral.
+	 * {@return the Arabic numeral equivalent of the passed Roman numeral}
 	 *
 	 * @param numeral a Roman numeral
-	 * @return the Arabic numeral equivalent of the passed Roman numeral
 	 */
 	Arabic<Short> convert(Roman numeral);
 
-	/**
-	 * Obtains an instance of {@code ArabicRomanConverter}.
-	 *
-	 * @return an instance of {@code ArabicRomanConverter}
-	 */
+	/** {@return an instance of {@code ArabicRomanConverter}} */
 	static ArabicRomanConverter instance()
 	{
 		return new DefaultArabicRomanConverter();
