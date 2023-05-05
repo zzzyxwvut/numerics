@@ -1,6 +1,11 @@
 package org.zzzyxwvut.numerics.converter;
 
+import static java.nio.charset.StandardCharsets.UTF_16;
+import static java.nio.charset.StandardCharsets.UTF_16BE;
+import static java.nio.charset.StandardCharsets.UTF_16LE;
+
 import java.math.BigDecimal;
+import java.nio.charset.Charset;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -85,6 +90,17 @@ public class ArabicRomanConverterTests implements Testable
 		assertEquals(expected, obtained);
 	}
 
+	public void testToRomanNumeralWith3999AndDefaultCharsetCompatibility()
+	{
+		final Charset defaultCharset = Charset.defaultCharset();
+		final Roman obtained = CONVERTER.convert(
+					new Arabic<>((short) 3999));
+		final Roman expected = new Roman(new String(
+					"MMMCMXCIX".getBytes(defaultCharset),
+					defaultCharset));
+		assertEquals(expected, obtained);
+	}
+
 	public void testToArabicNumeralWithEmptyString()
 	{
 		try {
@@ -101,6 +117,36 @@ public class ArabicRomanConverterTests implements Testable
 		final Arabic<Short> obtained = CONVERTER.convert(
 					new Roman("MMMDCCCLXXXVIII"));
 		final Arabic<Short> expected = new Arabic<>((short) 3888);
+		assertEquals(expected, obtained);
+	}
+
+	public void testToArabicNumeralWithUTF16MMMCCCXXXIII()
+	{
+		final Arabic<Short> obtained = CONVERTER.convert(
+							new Roman(new String(
+					"MMMCCCXXXIII".getBytes(UTF_16),
+					UTF_16)));
+		final Arabic<Short> expected = new Arabic<>((short) 3333);
+		assertEquals(expected, obtained);
+	}
+
+	public void testToArabicNumeralWithUTF16BEMCCCXIII()
+	{
+		final Arabic<Short> obtained = CONVERTER.convert(
+							new Roman(new String(
+					"MCCCXIII".getBytes(UTF_16BE),
+					UTF_16BE)));
+		final Arabic<Short> expected = new Arabic<>((short) 1313);
+		assertEquals(expected, obtained);
+	}
+
+	public void testToArabicNumeralWithUTF16LEMMMCXXXI()
+	{
+		final Arabic<Short> obtained = CONVERTER.convert(
+							new Roman(new String(
+					"MMMCXXXI".getBytes(UTF_16LE),
+					UTF_16LE)));
+		final Arabic<Short> expected = new Arabic<>((short) 3131);
 		assertEquals(expected, obtained);
 	}
 }
